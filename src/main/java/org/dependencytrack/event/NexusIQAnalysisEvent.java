@@ -16,19 +16,25 @@
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
-package org.dependencytrack.tasks.scanners;
+package org.dependencytrack.event;
+
+import org.dependencytrack.model.Component;
+
+import java.util.List;
 
 /**
- * Specifies identities of all supported analyzers.
- *
- * @since 4.0.0
+ * Defines an event used to start an analysis via Sonatype Nexus IQ
  */
-public enum AnalyzerIdentity {
-    INTERNAL_ANALYZER,
-    OSSINDEX_ANALYZER,
-    NPM_AUDIT_ANALYZER,
-    VULNDB_ANALYZER,
-    SNYK_ANALYZER,
-    NEXUSIQ_ANALYZER,
-    NONE
+public class NexusIQAnalysisEvent extends VulnerabilityAnalysisEvent {
+
+    public NexusIQAnalysisEvent() { }
+
+    public NexusIQAnalysisEvent(final Component component) {
+        super(component);
+    }
+
+    public NexusIQAnalysisEvent(final List<Component> components) {
+        super(components);
+    }
+
 }

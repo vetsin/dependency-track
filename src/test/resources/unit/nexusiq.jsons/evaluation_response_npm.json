@@ -1,0 +1,1377 @@
+{
+  "isError": false,
+  "evaluationDate": "2023-07-24T21:34:26.261Z",
+  "errorMessage": null,
+  "submittedDate": "2023-07-24T21:34:26.259Z",
+  "applicationId": "fd64a436f096424ab26a101aed5f370e",
+  "results": [
+    {
+      "hygieneRating": null,
+      "component": {
+        "proprietary": false,
+        "packageUrl": "pkg:npm/npm@5.1.0",
+        "displayName": "npm : 5.1.0",
+        "componentIdentifier": {
+          "format": "npm",
+          "coordinates": {
+            "packageId": "npm",
+            "version": "5.1.0"
+          }
+        },
+        "hash": "cf8201e044018e9c8953"
+      },
+      "relativePopularity": null,
+      "integrityRating": null,
+      "catalogDate": "2017-07-06T01:57:57.470Z",
+      "matchState": "exact",
+      "policyData": {
+        "policyViolations": [
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2019-16775 with severity >= 4 (severity = 6.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2019-16775 with severity < 7 (severity = 6.5)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2019-16777 with severity >= 4 (severity = 6.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2019-16777 with severity < 7 (severity = 6.5)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2020-15095 with severity >= 4 (severity = 4.4)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2020-15095 with severity < 7 (severity = 4.4)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2020-15366 with severity >= 4 (severity = 5.6)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2020-15366 with severity < 7 (severity = 5.6)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2020-7598 with severity >= 4 (severity = 5.6)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2020-7598 with severity < 7 (severity = 5.6)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2020-8244 with severity >= 4 (severity = 6.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2020-8244 with severity < 7 (severity = 6.5)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2021-23362 with severity >= 4 (severity = 5.3)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2021-23362 with severity < 7 (severity = 5.3)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-33987 with severity >= 4 (severity = 5.3)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-33987 with severity < 7 (severity = 5.3)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2023-28155 with severity >= 4 (severity = 6.1)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2023-28155 with severity < 7 (severity = 6.1)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2016-0091 with severity >= 4 (severity = 4.6)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2016-0091 with severity < 7 (severity = 4.6)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2017-0635 with severity >= 4 (severity = 5.9)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2017-0635 with severity < 7 (severity = 5.9)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2017-0655 with severity >= 4 (severity = 5.9)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2017-0655 with severity < 7 (severity = 5.9)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0065 with severity >= 4 (severity = 5.9)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0065 with severity < 7 (severity = 5.9)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0150 with severity >= 4 (severity = 6.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0150 with severity < 7 (severity = 6.5)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0278 with severity >= 4 (severity = 5.4)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0278 with severity < 7 (severity = 5.4)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0306 with severity >= 4 (severity = 5.4)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0306 with severity < 7 (severity = 5.4)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2019-0419 with severity >= 4 (severity = 5.9)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2019-0419 with severity < 7 (severity = 5.9)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "bca49154476a4c87b3f7b0d7ad766629",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-0074 with severity >= 4 (severity = 5.6)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-0074 with severity < 7 (severity = 5.6)"
+                  }
+                ],
+                "constraintName": "Medium risk CVSS score"
+              }
+            ],
+            "policyId": "0a58fd9058c048098187d45226d4d1e6",
+            "policyName": "Security-Medium",
+            "policyViolationId": null,
+            "threatLevel": 7
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "ab0856198dc2406487e738c4d4a35d5a",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2021-3918 with severity >= 9 (severity = 9.8)"
+                  }
+                ],
+                "constraintName": "Critical risk CVSS score"
+              }
+            ],
+            "policyId": "230b0616f2324b4c9a4648691795dc7e",
+            "policyName": "Security-Critical",
+            "policyViolationId": null,
+            "threatLevel": 10
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "ab0856198dc2406487e738c4d4a35d5a",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2023-26136 with severity >= 9 (severity = 9.8)"
+                  }
+                ],
+                "constraintName": "Critical risk CVSS score"
+              }
+            ],
+            "policyId": "230b0616f2324b4c9a4648691795dc7e",
+            "policyName": "Security-Critical",
+            "policyViolationId": null,
+            "threatLevel": 10
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "ab0856198dc2406487e738c4d4a35d5a",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2019-0206 with severity >= 9 (severity = 9.8)"
+                  }
+                ],
+                "constraintName": "Critical risk CVSS score"
+              }
+            ],
+            "policyId": "230b0616f2324b4c9a4648691795dc7e",
+            "policyName": "Security-Critical",
+            "policyViolationId": null,
+            "threatLevel": 10
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "ab0856198dc2406487e738c4d4a35d5a",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-0018 with severity >= 9 (severity = 9.8)"
+                  }
+                ],
+                "constraintName": "Critical risk CVSS score"
+              }
+            ],
+            "policyId": "230b0616f2324b4c9a4648691795dc7e",
+            "policyName": "Security-Critical",
+            "policyViolationId": null,
+            "threatLevel": 10
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "ab0856198dc2406487e738c4d4a35d5a",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-0887 with severity >= 9 (severity = 9.8)"
+                  }
+                ],
+                "constraintName": "Critical risk CVSS score"
+              }
+            ],
+            "policyId": "230b0616f2324b4c9a4648691795dc7e",
+            "policyName": "Security-Critical",
+            "policyViolationId": null,
+            "threatLevel": 10
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "703ae5384dee463186b4c77ffb67f3ca",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found component older than 5 years"
+                  }
+                ],
+                "constraintName": "Version is old"
+              }
+            ],
+            "policyId": "8e021ef7503b4474bb0571e7d6aca55f",
+            "policyName": "Architecture-Quality",
+            "policyViolationId": null,
+            "threatLevel": 1
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2018-20835 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2018-20835 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2018-3728 with severity >= 7 (severity = 8.8)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2018-3728 with severity < 9 (severity = 8.8)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2019-16776 with severity >= 7 (severity = 8.1)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2019-16776 with severity < 9 (severity = 8.1)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2021-32804 with severity >= 7 (severity = 8.1)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2021-32804 with severity < 9 (severity = 8.1)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-24999 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-24999 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-25881 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-25881 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-25883 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-25883 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-29167 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability CVE-2022-29167 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2016-0373 with severity >= 7 (severity = 8.0)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2016-0373 with severity < 9 (severity = 8.0)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2017-0362 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2017-0362 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2017-0519 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2017-0519 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0038 with severity >= 7 (severity = 8.3)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0038 with severity < 9 (severity = 8.3)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0079 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0079 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0087 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2018-0087 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2019-0224 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2019-0224 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-0941 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-0941 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-1018 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-1018 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-1040 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-1040 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-1214 with severity >= 7 (severity = 7.3)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2020-1214 with severity < 9 (severity = 7.3)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2021-1169 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2021-1169 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          },
+          {
+            "constraintViolations": [
+              {
+                "constraintId": "e22213121ae34550b84a31b3945cc18d",
+                "reasons": [
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2021-4879 with severity >= 7 (severity = 7.5)"
+                  },
+                  {
+                    "reference": null,
+                    "reason": "Found security vulnerability sonatype-2021-4879 with severity < 9 (severity = 7.5)"
+                  }
+                ],
+                "constraintName": "High risk CVSS score"
+              }
+            ],
+            "policyId": "9a1737703fb040458542bb6215d6a821",
+            "policyName": "Security-High",
+            "policyViolationId": null,
+            "threatLevel": 9
+          }
+        ]
+      },
+      "licenseData": {
+        "overriddenLicenses": [],
+        "declaredLicenses": [
+          {
+            "licenseName": "Artistic-2.0",
+            "licenseId": "Artistic-2.0"
+          }
+        ],
+        "effectiveLicenses": [
+          {
+            "licenseName": "Artistic-2.0",
+            "licenseId": "Artistic-2.0"
+          }
+        ],
+        "observedLicenses": [
+          {
+            "licenseName": "Not Supported",
+            "licenseId": "Not-Supported"
+          }
+        ],
+        "status": "Open"
+      },
+      "securityData": {
+        "securityIssues": [
+          {
+            "reference": "CVE-2018-20835",
+            "severity": 7.5,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20835",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2018-3728",
+            "severity": 8.8,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3728",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2019-16775",
+            "severity": 6.5,
+            "source": "cve",
+            "threatCategory": "severe",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16775",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2019-16776",
+            "severity": 8.1,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16776",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2019-16777",
+            "severity": 6.5,
+            "source": "cve",
+            "threatCategory": "severe",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16777",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2020-15095",
+            "severity": 4.4,
+            "source": "cve",
+            "threatCategory": "severe",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15095",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2020-15366",
+            "severity": 5.6,
+            "source": "cve",
+            "threatCategory": "severe",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15366",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2020-7598",
+            "severity": 5.6,
+            "source": "cve",
+            "threatCategory": "severe",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7598",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2020-8244",
+            "severity": 6.5,
+            "source": "cve",
+            "threatCategory": "severe",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8244",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2021-23362",
+            "severity": 5.3,
+            "source": "cve",
+            "threatCategory": "severe",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23362",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2021-32804",
+            "severity": 8.1,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-32804",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2021-3918",
+            "severity": 9.8,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3918",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2022-24999",
+            "severity": 7.5,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24999",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2022-25881",
+            "severity": 7.5,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25881",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2022-25883",
+            "severity": 7.5,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25883",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2022-29167",
+            "severity": 7.5,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29167",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2022-33987",
+            "severity": 5.3,
+            "source": "cve",
+            "threatCategory": "severe",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-33987",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2023-26136",
+            "severity": 9.8,
+            "source": "cve",
+            "threatCategory": "critical",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-26136",
+            "status": "Open"
+          },
+          {
+            "reference": "CVE-2023-28155",
+            "severity": 6.1,
+            "source": "cve",
+            "threatCategory": "severe",
+            "url": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28155",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2016-0091",
+            "severity": 4.6,
+            "source": "sonatype",
+            "threatCategory": "severe",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2016-0091",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2016-0373",
+            "severity": 8,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2016-0373",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2017-0362",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2017-0362",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2017-0519",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2017-0519",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2017-0635",
+            "severity": 5.9,
+            "source": "sonatype",
+            "threatCategory": "severe",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2017-0635",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2017-0655",
+            "severity": 5.9,
+            "source": "sonatype",
+            "threatCategory": "severe",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2017-0655",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2018-0038",
+            "severity": 8.3,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2018-0038",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2018-0065",
+            "severity": 5.9,
+            "source": "sonatype",
+            "threatCategory": "severe",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2018-0065",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2018-0079",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2018-0079",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2018-0087",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2018-0087",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2018-0150",
+            "severity": 6.5,
+            "source": "sonatype",
+            "threatCategory": "severe",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2018-0150",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2018-0278",
+            "severity": 5.4,
+            "source": "sonatype",
+            "threatCategory": "severe",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2018-0278",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2018-0306",
+            "severity": 5.4,
+            "source": "sonatype",
+            "threatCategory": "severe",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2018-0306",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2019-0206",
+            "severity": 9.8,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2019-0206",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2019-0224",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2019-0224",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2019-0419",
+            "severity": 5.9,
+            "source": "sonatype",
+            "threatCategory": "severe",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2019-0419",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2020-0018",
+            "severity": 9.8,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2020-0018",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2020-0074",
+            "severity": 5.6,
+            "source": "sonatype",
+            "threatCategory": "severe",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2020-0074",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2020-0887",
+            "severity": 9.8,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2020-0887",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2020-0941",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2020-0941",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2020-1018",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2020-1018",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2020-1040",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2020-1040",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2020-1214",
+            "severity": 7.3,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2020-1214",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2021-1169",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2021-1169",
+            "status": "Open"
+          },
+          {
+            "reference": "sonatype-2021-4879",
+            "severity": 7.5,
+            "source": "sonatype",
+            "threatCategory": "critical",
+            "url": "http://nexus-iq.devsnc.com/ui/links/vln/sonatype-2021-4879",
+            "status": "Open"
+          }
+        ]
+      }
+    }
+  ]
+}

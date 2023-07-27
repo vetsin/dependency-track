@@ -1,0 +1,50 @@
+{
+  "identifier": "CVE-2018-20835",
+  "vulnIds": [
+    "CVE-2018-20835"
+  ],
+  "vulnerabilityLink": "http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2018-20835",
+  "source": {
+    "shortName": "CVE",
+    "longName": "National Vulnerability Database"
+  },
+  "mainSeverity": {
+    "source": "cve_cvss_3",
+    "score": 7.5,
+    "vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+  },
+  "severityScores": [
+    {
+      "source": "cve_cvss_2",
+      "score": 6.4
+    },
+    {
+      "source": "sonatype_cvss_3",
+      "score": 7.5
+    }
+  ],
+  "weakness": {
+    "cweSource": "CVE",
+    "cweIds": [
+      {
+        "id": "20",
+        "uri": "https://cwe.mitre.org/data/definitions/20.html"
+      }
+    ]
+  },
+  "categories": [
+    "data"
+  ],
+  "description": "A vulnerability was found in tar-fs before 1.16.2. An Arbitrary File Overwrite issue exists when extracting a tarball containing a hardlink to a file that already exists on the system, in conjunction with a later plain file with the same name as the hardlink. This plain file content replaces the existing file content.",
+  "explanationMarkdown": "The `tar-fs` package is vulnerable to Arbitrary File Overwrite. The `onlink` function in `index.js` will follow hard links when extracting TARs and overwrite the file the hard link points to with a file in the TAR that has the same name as the hard link. An attacker can exploit this behavior to overwrite arbitrary files on the file system that the vulnerable component has access to.",
+  "detectionMarkdown": "The application is vulnerable by using this component on a file system that supports hard links.",
+  "recommendationMarkdown": "We recommend upgrading to a version of this component that is not vulnerable to this specific issue.\n\nNote: If this component is included as a bundled/transitive dependency of another component, there may not be an upgrade path. In this instance, we recommend contacting the maintainers who included the vulnerable package. Alternatively, we recommend investigating alternative components or a potential mitigating control.",
+  "advisories": [
+    {
+      "referenceType": "THIRD_PARTY",
+      "url": "https://hackerone.com/reports/344595"
+    }
+  ],
+  "researchType": "DEEP_DIVE",
+  "isAdvancedVulnerabilityDetection": false
+}

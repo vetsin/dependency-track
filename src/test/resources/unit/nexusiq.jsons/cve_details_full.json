@@ -1,0 +1,75 @@
+{
+  "identifier": "CVE-2022-22815",
+  "vulnIds": [
+    "CVE-2022-22815"
+  ],
+  "vulnerabilityLink": "http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2022-22815",
+  "source": {
+    "shortName": "CVE",
+    "longName": "National Vulnerability Database"
+  },
+  "mainSeverity": {
+    "source": "cve_cvss_3",
+    "score": 9.8,
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+  },
+  "severityScores": [
+    {
+      "source": "cve_cvss_2",
+      "score": 7.5
+    },
+    {
+      "source": "sonatype_cvss_3",
+      "score": 9.8
+    }
+  ],
+  "weakness": {
+    "cweSource": "CVE",
+    "cweIds": [
+      {
+        "id": "665",
+        "uri": "https://cwe.mitre.org/data/definitions/665.html"
+      }
+    ]
+  },
+  "categories": [
+    "data"
+  ],
+  "description": "path_getbbox in path.c in Pillow before 9.0.0 improperly initializes ImagePath.Path.",
+  "explanationMarkdown": "The `Pillow` package is vulnerable due to Improper Initialization. The `alloc_array()` and `path_getbbox()` functions in the `path.c` file do not properly initialize coordinates before using them to construct path objects. A remote attacker can supply specially-crafted input that exploits the aforementioned issue to gain unauthorized access to memory, cause an application crash, or other unexpected behavior.",
+  "componentExplanationMarkdown": "",
+  "detectionMarkdown": "The application is vulnerable by using this component.",
+  "componentDetectionMarkdown": "",
+  "recommendationMarkdown": "We recommend upgrading to a version of this component that is not vulnerable to this specific issue.\n\nNote: If this component is included as a bundled/transitive dependency of another component, there may not be an upgrade path. In this instance, we recommend contacting the maintainers who included the vulnerable package. Alternatively, we recommend investigating alternative components or a potential mitigating control.",
+  "componentRecommendationMarkdown": "",
+  "rootCauses": [
+    {
+      "listOfPaths": [
+        "Pillow-8.3.2.tar.gz",
+        "Pillow-8.3.2/src/path.c"
+      ],
+      "versionRange": "[5.0.0 , 9.0.0)"
+    }
+  ],
+  "advisories": [
+    {
+      "referenceType": "PROJECT",
+      "url": "https://github.com/python-pillow/Pillow/pull/5920"
+    },
+    {
+      "referenceType": "THIRD_PARTY",
+      "url": "https://access.redhat.com/security/cve/cve-2022-22815"
+    }
+  ],
+  "vulnerableVersionRanges": [
+    "[8.3.2,9.0.0)"
+  ],
+  "researchType": "DEEP_DIVE",
+  "isAdvancedVulnerabilityDetection": false,
+  "customData": {
+    "remediation": "some-string",
+    "cweId": "some-cwe-ids",
+    "cvssVector": "some/vector",
+    "cvssSeverity": 7.6
+  }
+}

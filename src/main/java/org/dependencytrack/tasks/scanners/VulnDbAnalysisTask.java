@@ -188,4 +188,6 @@ public class VulnDbAnalysisTask extends BaseComponentAnalyzerTask implements Sub
         }
     }
 
+    public static class VulDbAnalysisTask {
+    }
 }
