@@ -1,23 +1,40 @@
+/*
+ * This file is part of Dependency-Track.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ * Copyright (c) Steve Springett. All Rights Reserved.
+ */
 package org.dependencytrack.parser.nexusiq;
 
 import org.dependencytrack.model.*;
 import org.dependencytrack.tasks.scanners.AnalyzerIdentity;
+import org.dependencytrack.tasks.scanners.NexusIQAnalysisTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import us.springett.cvss.Cvss;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class NexusIQEvaluationParser {
+public class NexusIQParser {
 
-    public NexusIQEvaluationParser() {
+    public NexusIQParser() {
     }
 
     public JSONObject matchComponent(Component component, JSONArray results) {
@@ -95,8 +112,14 @@ public class NexusIQEvaluationParser {
 
 
     private boolean componentMatches(Component c1, JSONObject c2) {
-        if(Objects.requireNonNull(c1.getPurl()).equals(c2.optString("packageUrl"))) {
-            return true;
+        var purl = c1.getPurl();
+        if(purl != null) {
+            if(purl.toString().equals(c2.optString("packageUrl"))) {
+                return true;
+            }
+            if(NexusIQAnalysisTask.correctPurl(purl).toString().equals(c2.optString("packageUrl"))) {
+                return true;
+            }
         }
         var id = c2.optJSONObject("componentIdentifier");
         if(id != null) {

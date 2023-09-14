@@ -19,23 +19,15 @@
 package org.dependencytrack.tasks.scanners;
 
 import alpine.common.logging.Logger;
-import alpine.common.util.UrlUtil;
 import alpine.event.framework.Event;
 import alpine.event.framework.Subscriber;
-import alpine.model.ConfigProperty;
 import alpine.notification.Notification;
 import alpine.notification.NotificationLevel;
-import alpine.security.crypto.DataEncryption;
+import com.github.packageurl.MalformedPackageURLException;
 import com.github.packageurl.PackageURL;
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.methods.*;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.util.EntityUtils;
-import org.dependencytrack.common.HttpClientPool;
-import org.dependencytrack.common.ManagedHttpClientFactory;
+import org.dependencytrack.event.IndexEvent;
 import org.dependencytrack.event.NexusIQAnalysisEvent;
+import org.dependencytrack.integrations.sonatype.NexusIQClient;
 import org.dependencytrack.model.Component;
 import org.dependencytrack.model.ConfigPropertyConstants;
 import org.dependencytrack.model.Vulnerability;
@@ -43,16 +35,18 @@ import org.dependencytrack.model.VulnerabilityAnalysisLevel;
 import org.dependencytrack.notification.NotificationConstants;
 import org.dependencytrack.notification.NotificationGroup;
 import org.dependencytrack.notification.NotificationScope;
-import org.dependencytrack.parser.nexusiq.NexusIQEvaluationParser;
+import org.dependencytrack.parser.nexusiq.NexusIQParser;
 import org.dependencytrack.persistence.QueryManager;
+import org.dependencytrack.util.NotificationUtil;
+import org.dependencytrack.util.PropertyUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URISyntaxException;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static io.github.resilience4j.core.IntervalFunction.ofExponentialBackoff;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * Subscriber task that performs an analysis of component using Snyk vulnerability REST API.
@@ -67,6 +61,7 @@ public class NexusIQAnalysisTask extends BaseComponentAnalyzerTask implements Ca
     private static final Set<String> SUPPORTED_PURL_TYPES = Set.of(
             PackageURL.StandardTypes.CARGO,
             "cocoapods", // Not defined in StandardTypes
+            "a-name", // what IQ says is generic or file
             PackageURL.StandardTypes.GENERIC,
             PackageURL.StandardTypes.COMPOSER,
             PackageURL.StandardTypes.GEM,
@@ -78,59 +73,37 @@ public class NexusIQAnalysisTask extends BaseComponentAnalyzerTask implements Ca
             PackageURL.StandardTypes.PYPI
     );
 
-    private String apiBaseUrl;
-    //private String apiOrgId;
-    private String apiAppPubId;
-    private String apiToken;
+    private NexusIQClient client;
+    private String orgAppId;
     private boolean aliasSyncEnabled;
-    private int reportWaitTime;
+    private Integer reportWaitTime;
     private VulnerabilityAnalysisLevel vulnerabilityAnalysisLevel;
 
-    private String getProperty(QueryManager qm, ConfigPropertyConstants property) {
-        final ConfigProperty theProperty = qm.getConfigProperty(
-                property.getGroupName(),
-                property.getPropertyName()
-        );
-        if (theProperty == null || theProperty.getPropertyValue() == null) {
-            LOGGER.warn(String.format("No property %s provided; skipping", property.getPropertyName()));
-            return null;
-        }
-        return theProperty.getPropertyValue();
+    private boolean isEnabled() {
+        return super.isEnabled(ConfigPropertyConstants.SCANNER_NEXUSIQ_ENABLED);
     }
+
+    private boolean isConfigured() {
+        return this.client != null;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void inform(final Event e) {
         if (e instanceof final NexusIQAnalysisEvent event) {
-            if (!super.isEnabled(ConfigPropertyConstants.SCANNER_NEXUSIQ_ENABLED)) {
+            if(!isEnabled())
                 return;
-            }
+
             try (var qm = new QueryManager()) {
+                this.client = new NexusIQClient();
 
-                if((this.apiBaseUrl = getProperty(qm, ConfigPropertyConstants.SCANNER_NEXUSIQ_BASE_URL)) == null) {
-                   return;
-                }
-                if((this.apiAppPubId = getProperty(qm, ConfigPropertyConstants.SCANNER_NEXUSIQ_ORG_APP_ID)) == null) {
-                    return;
-                }
-                try {
-                    String encryptedToken;
-                    if((encryptedToken = getProperty(qm, ConfigPropertyConstants.SCANNER_NEXUSIQ_USER_TOKEN)) == null) {
-                        return;
-                    }
-                    this.apiToken = DataEncryption.decryptAsString(encryptedToken);
-                } catch (Exception ex) {
-                    LOGGER.error("An error occurred decrypting the Nexus IQ User Token; Skipping", ex);
-                    return;
-                }
+                this.orgAppId = PropertyUtil.getProperty(qm, ConfigPropertyConstants.SCANNER_NEXUSIQ_ORG_APP_ID).orElse("Dependency-Track");
 
-                var wait = getProperty(qm, ConfigPropertyConstants.SCANNER_NEXUSIQ_REPORT_PERIOD);
-                if(wait == null) {
-                    this.reportWaitTime = 120;
-                } else {
-                    this.reportWaitTime = Integer.parseInt(wait);
-                }
+                this.reportWaitTime = PropertyUtil
+                        .<Integer>getTypedProperty(qm, ConfigPropertyConstants.SCANNER_NEXUSIQ_REPORT_PERIOD)
+                        .orElse(120);
 
                 this.aliasSyncEnabled = super.isEnabled(ConfigPropertyConstants.SCANNER_NEXUSIQ_ALIAS_SYNC_ENABLED);
             }
@@ -162,8 +135,7 @@ public class NexusIQAnalysisTask extends BaseComponentAnalyzerTask implements Ca
                 && component.getPurl().getName() != null
                 && component.getPurl().getVersion() != null;
 
-        return hasValidPurl && SUPPORTED_PURL_TYPES.stream()
-                .anyMatch(purlType -> purlType.equals(component.getPurl().getType()));
+        return hasValidPurl && SUPPORTED_PURL_TYPES.stream().anyMatch(Predicate.isEqual(component.getPurl().getType()));
     }
 
     /**
@@ -174,7 +146,7 @@ public class NexusIQAnalysisTask extends BaseComponentAnalyzerTask implements Ca
 
         var uncached = new ArrayList<Component>();
         components.forEach((c) -> {
-            if (isCacheCurrent(Vulnerability.Source.NEXUSIQ, apiBaseUrl, c.getPurl().toString())) {
+            if (isCacheCurrent(Vulnerability.Source.NEXUSIQ, this.client.getApiBaseUrl().toString(), c.getPurl().toString())) {
                 applyAnalysisFromCache(c);
             } else {
                 uncached.add(c);
@@ -189,9 +161,7 @@ public class NexusIQAnalysisTask extends BaseComponentAnalyzerTask implements Ca
      */
     @Override
     public boolean shouldAnalyze(final PackageURL packageUrl) {
-        return getApiBaseUrl()
-                .map(baseUrl -> !isCacheCurrent(Vulnerability.Source.NEXUSIQ, apiBaseUrl, packageUrl.getCoordinates()))
-                .orElse(false);
+        return !isCacheCurrent(Vulnerability.Source.NEXUSIQ, this.client.getApiBaseUrl().toString(), packageUrl.getCoordinates());
     }
 
     /**
@@ -199,78 +169,64 @@ public class NexusIQAnalysisTask extends BaseComponentAnalyzerTask implements Ca
      */
     @Override
     public void applyAnalysisFromCache(final Component component) {
-        getApiBaseUrl().ifPresent(baseUrl ->
-                applyAnalysisFromCache(Vulnerability.Source.NEXUSIQ, apiBaseUrl,
-                        component.getPurl().toString(), component, getAnalyzerIdentity(), vulnerabilityAnalysisLevel));
+        applyAnalysisFromCache(Vulnerability.Source.NEXUSIQ, this.client.getApiBaseUrl().toString(),
+                        component.getPurl().toString(), component, getAnalyzerIdentity(), vulnerabilityAnalysisLevel);
+    }
+
+
+    /**
+     * Not as much 'correct' as make generic and a-name interchangeable
+     */
+    public static PackageURL correctPurl(PackageURL purl) {
+        // easiest way is from string and back...
+        String purlStr = purl.toString();
+        if(purl.getType().equals(PackageURL.StandardTypes.GENERIC)) {
+            purlStr = purlStr.replaceFirst("pkg:generic", "pkg:a-name");
+        }
+        try {
+            return new PackageURL(purlStr);
+        } catch(MalformedPackageURLException e) {
+            return purl;
+        }
     }
 
     private void analyzeComponents(final List<Component> component) {
-        List<String> purls = component.stream().map((c) -> {
-            var purl = c.getPurl();
-            if(purl.getType() == PackageURL.StandardTypes.GENERIC) {
-                return purl.toString().replaceFirst("pkg:generic", "pkg:a-name");
-            }
-            return purl.toString();
-        }).collect(Collectors.toList());
+        List<String> purls = component.stream().map((c) -> correctPurl(c.getPurl()).toString()).toList();
 
-
-        final String requestUrl = "%s/api/v2/evaluation/applications/%s" .formatted(apiBaseUrl, apiAppPubId);
         try {
-            URIBuilder uriBuilder = new URIBuilder(requestUrl);
-            var request = new HttpPost(uriBuilder.build().toString());
-            prepareRequest(request);
-
-            var carr = new JSONArray();
-            for (String purl : purls) {
-                var o = new JSONObject();
-                o.put("packageUrl", purl);
-                carr.put(o);
+            NexusIQClient client = new NexusIQClient();
+            var evalResponse = client.evaluate(this.orgAppId, purls);
+            if(evalResponse.isEmpty()) {
+                //TODO: do something
             }
-            var body = new JSONObject();
-            body.put("components", carr);
+            var evalResponseJson = evalResponse.get();
+            String appId = evalResponseJson.getString("applicationId");
+            String resultId = evalResponseJson.getString("resultId");
 
-            request.setEntity(new StringEntity(body.toString(), ContentType.APPLICATION_JSON));
-
-            try(CloseableHttpResponse response = HttpClientPool.getClient().execute(request)) {
-                int code = response.getStatusLine().getStatusCode();
-                if(response.getEntity() != null) {
-                    String responseString = EntityUtils.toString(response.getEntity());
-                    JSONObject responseJson = new JSONObject(responseString);
-                    if(code >= 200 && code < 300) {
-                        String appId = responseJson.getString("applicationId");
-                        String resultId = responseJson.getString("resultId");
-
-                        var report = watchReport(appId, resultId);
-                        if(report.isPresent()) {
-                            var result = report.get();
-                            if(!result.getBoolean("isError")) {
-                                handle(component, result);
-                            } else {
-                                var msg = result.getString("errorMessage");
-                                LOGGER.error("Error processing report/evaluating components with NexusIQ");
-                                Notification.dispatch(new Notification()
-                                        .scope(NotificationScope.SYSTEM)
-                                        .group(NotificationGroup.ANALYZER)
-                                        .title(NotificationConstants.Title.ANALYZER_ERROR)
-                                        .content("There was an error evaluting components with NexusIQ: " + msg)
-                                        .level(NotificationLevel.ERROR));
-                            }
-                        } else {
-                            LOGGER.error("Timeout getting report from Nexus IQ");
-                            Notification.dispatch(new Notification()
-                                    .scope(NotificationScope.SYSTEM)
-                                    .group(NotificationGroup.ANALYZER)
-                                    .title(NotificationConstants.Title.ANALYZER_ERROR)
-                                    .content("There was a timeout while waiting for the Nexus IQ component analysis -- consider increasing the timeout property")
-                                    .level(NotificationLevel.ERROR));
-
-                        }
-                    } else {
-                        handleUnexpectedHttpResponse(LOGGER, request.getURI().toString(), code, response.getStatusLine().getReasonPhrase());
-                    }
+            var report = watchReport(appId, resultId);
+            if(report.isPresent()) {
+                var result = report.get();
+                if(!result.getBoolean("isError")) {
+                    handle(component, result);
                 } else {
-                    handleUnexpectedHttpResponse(LOGGER, request.getURI().toString(), code, response.getStatusLine().getReasonPhrase());
+                    var msg = result.getString("errorMessage");
+                    LOGGER.error("Error processing report/evaluating components with NexusIQ");
+                    Notification.dispatch(new Notification()
+                            .scope(NotificationScope.SYSTEM)
+                            .group(NotificationGroup.ANALYZER)
+                            .title(NotificationConstants.Title.ANALYZER_ERROR)
+                            .content("There was an error evaluting components with NexusIQ: " + msg)
+                            .level(NotificationLevel.ERROR));
                 }
+            } else {
+                LOGGER.error("Timeout getting report from Nexus IQ");
+                Notification.dispatch(new Notification()
+                        .scope(NotificationScope.SYSTEM)
+                        .group(NotificationGroup.ANALYZER)
+                        .title(NotificationConstants.Title.ANALYZER_ERROR)
+                        .content("There was a timeout while waiting for the Nexus IQ component analysis -- consider increasing the timeout property")
+                        .level(NotificationLevel.ERROR));
+
             }
         } catch (Throwable  ex) {
             handleRequestException(LOGGER, ex);
@@ -280,7 +236,7 @@ public class NexusIQAnalysisTask extends BaseComponentAnalyzerTask implements Ca
     private Optional<JSONObject> watchReport(String appId, String reportId) throws InterruptedException {
         // try every 5 seconds, up to REPORT_WAIT_TIME
         for(int i = 0; i <= reportWaitTime/5; i++) {
-            Optional<JSONObject> response = getResults(appId, reportId);
+            Optional<JSONObject> response = this.client.getReport(appId, reportId);
             if(response.isPresent()) {
                 return response;
             }
@@ -289,133 +245,36 @@ public class NexusIQAnalysisTask extends BaseComponentAnalyzerTask implements Ca
         return Optional.empty();
     }
 
-    private Optional<JSONObject> getResults(String appId, String reportId) {
-        final String requestUrl = "%s/api/v2/evaluation/applications/%s/results/%s" .formatted(apiBaseUrl, appId, reportId);
-        try {
-            var request = new HttpGet(new URIBuilder(requestUrl).build().toString());
-            return executeRequest(request);
-        } catch(Exception ex) {
-            handleRequestException(LOGGER, ex);
-            return Optional.empty();
-        }
-    }
-
-    private void prepareRequest(HttpRequestBase request) {
-        request.setHeader(HttpHeaders.USER_AGENT, ManagedHttpClientFactory.getUserAgent());
-        request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + Base64.getEncoder().encodeToString(apiToken.getBytes()));
-        request.setHeader(HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.getMimeType());
-    }
 
     private void handle(List<Component> components, final JSONObject object) {
         // object is the FULL report response
         try (QueryManager qm = new QueryManager()) {
             final JSONArray results = object.getJSONArray("results");
-            final var iqParser = new NexusIQEvaluationParser();
+            final var iqParser = new NexusIQParser();
 
             for(Component component : components) {
                 var resultComponent = iqParser.matchComponent(component, results);
 
-                iqParser.getReferences(resultComponent).stream().map(reference -> getVulnerabilityDetails(reference))
+                List<JSONObject> vulns = iqParser.getReferences(resultComponent).stream()
+                        .map(reference -> this.client.getVulnerabilityDetails(reference))
+                        .flatMap(Optional::stream)
+                        .toList();
 
-                var securityData = resultComponent.getJSONObject("securityData");
-                var securityIssues = resultComponent.getJSONArray("securityIssues");
-                for(var i = 0; i < securityIssues.length(); i++) {
-                    var issue = securityIssues.getJSONObject(i);
-                    getVulnerabilityDetails(issue.getString("reference"), resultComponent.getJSONObject("component"));
-                }
-            }
-
-                for (int count = 0; count < data.length(); count++) {
-                    Vulnerability synchronizedVulnerability = snykParser.parse(data, qm, purl, count, aliasSyncEnabled);
-                    addVulnerabilityToCache(component, synchronizedVulnerability);
+                for(JSONObject vulnData : vulns) {
+                    Vulnerability vuln = iqParser.parseIntoVulnerability(vulnData);
+                    addVulnerabilityToCache(component, vuln);
+                    // ill be honst, dont know what this does
                     final Component componentPersisted = qm.getObjectByUuid(Component.class, component.getUuid());
-                    if (componentPersisted != null && synchronizedVulnerability.getVulnId() != null) {
-                        NotificationUtil.analyzeNotificationCriteria(qm, synchronizedVulnerability, componentPersisted, vulnerabilityAnalysisLevel);
-                        qm.addVulnerability(synchronizedVulnerability, componentPersisted, this.getAnalyzerIdentity());
-                        LOGGER.debug("Snyk vulnerability added : " + synchronizedVulnerability.getVulnId() + " to component " + component.getName());
+                    if (componentPersisted != null && vuln.getVulnId() != null) {
+                        NotificationUtil.analyzeNotificationCriteria(qm, vuln, componentPersisted, vulnerabilityAnalysisLevel);
+                        qm.addVulnerability(vuln, componentPersisted, this.getAnalyzerIdentity());
+                        LOGGER.debug("NexusIQ vulnerability added : " + vuln.getVulnId() + " to component " + component.getName());
                     }
                     Event.dispatch(new IndexEvent(IndexEvent.Action.COMMIT, Vulnerability.class));
                 }
-            } else {
-                //addNoVulnerabilityToCache(component);
+
+                updateAnalysisCacheStats(qm, Vulnerability.Source.NEXUSIQ, this.client.getApiBaseUrl().toString(), component.getPurl().getCoordinates(), component.getCacheResult());
             }
-            updateAnalysisCacheStats(qm, Vulnerability.Source.SNYK, apiBaseUrl, component.getPurl().getCoordinates(), component.getCacheResult());
-        }
-
-    }
-
-    private Optional<Vulnerability> getVulnerabilityDetails(String reference) {
-        return getVulnerabilityDetails(reference, null);
-    }
-
-    private Optional<Vulnerability> getVulnerabilityDetails(String reference, JSONObject componentIdentifier) {
-
-        if(isCacheCurrent(Vulnerability.Source.NEXUSIQ, apiBaseUrl, reference)) {
-
-        }
-
-
-        try {
-            var builder = new URIBuilder(apiBaseUrl);
-            builder.setPathSegments("api", "v2", "vulnerabilities", reference);
-            if(componentIdentifier != null) {
-                builder.addParameter("componentIdentifier", componentIdentifier.toString());
-            }
-            var request = new HttpGet(builder.build().toString());
-            var vulnData = executeRequest(request);
-            var parser = new NexusIQEvaluationParser(null);
-            if(vulnData.isEmpty()) {
-                return Optional.empty();
-            }
-            var vuln = parser.parseIntoVulnerability(vulnData.get());
-            return Optional.of(vuln);
-
-        } catch(URISyntaxException ex) {
-            handleRequestException(LOGGER, ex);
-            return Optional.empty();
         }
     }
-
-    private Optional<JSONObject> executeRequest(HttpRequestBase request) {
-        prepareRequest(request);
-
-        try(CloseableHttpResponse response = HttpClientPool.getClient().execute(request)) {
-            int code = response.getStatusLine().getStatusCode();
-            if(code >= 200 && code < 300) {
-                if(response.getEntity() != null) {
-                    String responseString = EntityUtils.toString(response.getEntity());
-                    //
-                    return Optional.of(new JSONObject(responseString));
-                }
-            } else if (code ==  404) {
-                LOGGER.error("Request failure -- 404: " + EntityUtils.toString(response.getEntity()));
-                return Optional.empty();
-            } else {
-                handleUnexpectedHttpResponse(LOGGER, request.getURI().toString(), code, response.getStatusLine().getReasonPhrase());
-            }
-        } catch (Exception ex) {
-            handleRequestException(LOGGER, ex);
-            return Optional.empty();
-        }
-    }
-
-    private Optional<String> getApiBaseUrl() {
-        if (apiBaseUrl != null) {
-            return Optional.of(apiBaseUrl);
-        }
-
-        try (final var qm = new QueryManager()) {
-            final ConfigProperty property = qm.getConfigProperty(
-                    ConfigPropertyConstants.SCANNER_NEXUSIQ_BASE_URL.getGroupName(),
-                    ConfigPropertyConstants.SCANNER_NEXUSIQ_BASE_URL.getPropertyName()
-            );
-            if (property == null) {
-                return Optional.empty();
-            }
-
-            apiBaseUrl = UrlUtil.normalize(property.getPropertyValue());
-            return Optional.of(apiBaseUrl);
-        }
-    }
-
 }
